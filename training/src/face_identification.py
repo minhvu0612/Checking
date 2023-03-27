@@ -38,7 +38,7 @@ class Face_identifier:
         output_data = output_data.flatten()
         return output_data
 
-    def result_name(self, image, data_train, classes, threshold=0.75):
+    def result_email(self, image, data_train, classes, threshold=0.75):
         image_embedding = self.embed_image(image)
         for i in range(len(classes)):
             data_train[i] = np.array(data_train[i])

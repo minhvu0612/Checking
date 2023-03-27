@@ -45,5 +45,7 @@ class Face_detector:
                 img = image[y_min:y_max, x_min:x_max, :]
                 img = cv2.resize(img, (FACE_SIZE, FACE_SIZE))
                 imgs.append(img)
+        if len(imgs) == 0:
+            return None, None, None
         return imgs, x, y
 

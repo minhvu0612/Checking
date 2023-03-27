@@ -8,7 +8,7 @@ def main():
     df = pd.DataFrame(
         {
             "face": [],
-            "name": [],
+            "email": [],
         }
     )
     df.to_json(DATA_FACE_DIR)
