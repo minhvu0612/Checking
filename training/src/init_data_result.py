@@ -7,7 +7,7 @@ from settings import (
 def main():
     df = pd.DataFrame(
         {
-            "name": [],
+            "email": [],
             "time": [],
         }
     )

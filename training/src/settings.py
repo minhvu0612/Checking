@@ -1,4 +1,4 @@
-path = "training/"
+path = "/app/training/"
 
 MODEL_DETECT_FACE_XML = (
     path + "models/face-detection-retail-0004/FP32/face-detection-retail-0004.xml"
@@ -12,5 +12,5 @@ MODEL_IDENTIFY_BIN = path + "models/face-reidentification-retail-0095/FP32/face-
 
 FACE_SIZE = 128
 
-DATA_FACE_DIR   = path + "datasets/face/processed/data_face.json"
-DATA_RESULT_DIR = path + "datasets/face/processed/result.json"
+DATA_FACE_DIR = "./inteferance/training/datasets/face/processed/data_face.json"
+DATA_RESULT_DIR =  "./inteferance/training/datasets/face/processed/result.json"
