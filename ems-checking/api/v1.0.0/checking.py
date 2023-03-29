@@ -7,15 +7,18 @@ from training.src.face_rec import Face_recognition
 import numpy as np
 from PIL import Image
 import cv2
+import pandas as pd
 import base64
 import io
-
+from training.src.settings import (
+    DATA_FACE_DIR,
+)
 
 
 # Class 
 class Member(BaseModel):
     email: str
-    image: str
+    images: str
 
 class Detection(BaseModel):
     image: str
@@ -35,11 +38,26 @@ class UnicornException(Exception):
 @app.post("/tims/api/v1/checking")
 async def add_new_member(item: Member):
     trainer = Trainer()
-    img = stringToRGB(item.image)
-    result = trainer.add_member(image = img, email = item.email)
-    if result is None:
-        return "Add member failed"
-    return "Add member successfully!"
+    indexes = []
+    s = ''
+    df = pd.read_json(DATA_FACE_DIR)
+    members = df['email'].to_numpy()
+    if item.email in members:
+        return "Email already exist!"
+    if len(item.images) < 5:
+        return "Not enough pictures!"
+    for index in range(len(item.images)):
+        img = stringToRGB(item.images[index])
+        result, index = trainer.add_member(image = img, email = item.email, index=index)
+        if result is None:
+            indexes.append(index)
+    if len(indexes) == 0:
+        return "Add member successfully!"
+    else:
+        for index in indexes[:-1]:
+            s = s + ' ' + str(index) + ','
+        s = s + ' ' + str(index) + '!'
+        return "Add member failed! Images that cannot be recognized:" + s 
 
 @app.delete("/delete")
 async def delete_member(item: Elimination):

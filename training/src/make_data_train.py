@@ -17,11 +17,11 @@ class Trainer:
         self.face_identifier = Face_identifier()
         self.face_detector = Face_detector()
 
-    def add_member(self, image, email):
+    def add_member(self, image, email, index):
         "Add new menber data into dataset"
         image = self.face_detector.detect_face(image)[0]
         if image is None:
-            return None
+            return None, index
         image = image[0]
         image_embedding = self.face_identifier.embed_image(image)
         self.data_image.append(image_embedding)
