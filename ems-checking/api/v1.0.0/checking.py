@@ -54,6 +54,8 @@ async def add_new_member(item: Member):
     if len(indexes) == 0:
         return "Add member successfully!"
     else:
+        df = df[df["email"] != item.email]
+        df.to_json(DATA_FACE_DIR)
         for index in indexes[:-1]:
             s = s + ' ' + str(index) + ','
         s = s + ' ' + str(index) + '!'
